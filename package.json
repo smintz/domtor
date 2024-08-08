@@ -1,15 +1,15 @@
 {
   "name": "domtor",
-  "version": "0.1.0",
+  "version": "0.1.2",
   "description": "A structured, reusable UI components with a functional approach.",
   "main": "index.ts",
   "directories": {
     "example": "example"
   },
-  "dependencies": {
+  "dependencies": {},
+  "devDependencies": {
     "esbuild": "^0.23.0"
   },
-  "devDependencies": {},
   "scripts": {
     "build": "esbuild index.ts --bundle --minify --sourcemap --outfile=dist/index.js"
   },

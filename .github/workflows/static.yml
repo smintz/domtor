@@ -29,9 +29,9 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
     defaults:
-      run: 
+      run:
         working-directory: ./example/todo
-    
+
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -39,17 +39,19 @@ jobs:
         uses: borales/actions-yarn@v4
         with:
           cmd: install # will run `yarn install` command
-      - name: Run install
+          dir: ./example/todo
+      - name: Run build
         uses: borales/actions-yarn@v4
         with:
           cmd: build # will run `yarn install` command
+          dir: ./example/todo
       - name: Setup Pages
         uses: actions/configure-pages@v5
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
           # Upload entire repository
-          path: '.'
+          path: ./example/todo
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4

@@ -1,0 +1,26 @@
+{
+  "name": "domtor",
+  "version": "0.1.0",
+  "description": "A structured, reusable UI components with a functional approach.",
+  "main": "index.ts",
+  "directories": {
+    "example": "example"
+  },
+  "dependencies": {
+    "esbuild": "^0.23.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "build": "esbuild index.ts --bundle --minify --sourcemap --outfile=dist/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/smintz/domtor.git"
+  },
+  "author": "Shahar Mintz <smintz@duck.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/smintz/domtor/issues"
+  },
+  "homepage": "https://github.com/smintz/domtor#readme"
+}

@@ -156,6 +156,35 @@ export const Mutator = (callback) => {
   };
 };
 
+export const LocalStorageMutator = (key, defaultContext?) =>
+  Mutator(async (ctx, next) => {
+    const ctxStr =
+      localStorage.getItem(key) || JSON.stringify(defaultContext || {});
+    ctx = await next(Object.assign(ctx, JSON.parse(ctxStr)));
+    localStorage.setItem(key, JSON.stringify(ctx));
+    return ctx;
+  });
+
+export const FetchMutator = (url: RequestInfo, options: RequestInit = {}) =>
+  Mutator(async (ctx, next) => {
+    const res = await fetch(url, options);
+    const data = await res.json();
+    return next(Object.assign(ctx, data));
+  });
+
+export const FetchPutMutator = (url: RequestInfo, options: RequestInit = {}) =>
+  Mutator(async (ctx, next) => {
+    options.method = "PUT";
+    options.headers = {
+      "Content-Type": "application/json",
+    };
+    options.body = JSON.stringify(await next(ctx));
+
+    const res = await fetch(url, options);
+    const data = await res.json();
+    return Object.assign(ctx, data);
+  });
+
 export const DebugMutator = (prefix) =>
   Mutator((ctx, next) => {
     console.log(prefix, "before mutating", ctx);

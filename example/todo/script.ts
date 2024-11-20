@@ -16,9 +16,9 @@ import {
 import { SetAttr, Text, AddClass, HTML } from "domtor/core";
 import {
   ContextManager,
-  Mutator,
   Context,
   ContextFunction,
+  LocalStorageMutator,
 } from "domtor/context";
 // State
 type Task = { text: string; completed: boolean };
@@ -255,15 +255,8 @@ document.addEventListener("DOMContentLoaded", () => {
     main.appendChild(
       ContextManager(
         TodoApp,
-        Mutator(async (ctx, next) => {
-          const ctxStr = localStorage.getItem("ctx") || "{}";
-          ctx = await next(Object.assign(ctx, JSON.parse(ctxStr)));
-          localStorage.setItem("ctx", JSON.stringify(ctx));
-          return ctx;
-        }),
-        Mutator((ctx, next) => {
-          ctx.tasks = ctx.tasks || [{ text: "hello", completed: false }];
-          return next(ctx);
+        LocalStorageMutator("ctx", {
+          tasks: [{ text: "hello", completed: false }],
         })
       )
     );

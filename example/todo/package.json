@@ -10,7 +10,7 @@
     "esbuild": "^0.23.0"
   },
   "scripts": {
-    "build": "esbuild script.ts --bundle  --sourcemap --outfile=dist/index.js",
+    "build": "esbuild script.ts --bundle --minify --sourcemap --outfile=dist/index.js",
     "watch": "esbuild script.ts --bundle --sourcemap --outfile=dist/index.js --watch"
   }
 }
